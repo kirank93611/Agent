@@ -1,0 +1,60 @@
+generator client {
+  provider = "prisma-client-js"
+}
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+model User {
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  name      String    @default("User")
+  password String 
+  agents    Agents[] @relation("UserAgents")
+  bills     Bill[]
+  subscriptions Subscription[]
+}
+model Agents {
+  id          Int      @id @default(autoincrement())
+  name        String @default("none")
+  purpose     String
+  live        Boolean  @default(false)
+  cost        Int
+  agent_type  String
+  Agent_Type  Agent_Type @relation(fields: [agent_type], references: [type])
+  userId      Int 
+  user        User @relation(fields: [userId], references: [id], name: "UserAgents") // Define relation
+  bills       Bill[]
+  subscriptions Subscription[]
+}
+model Agent_Type {
+  id          Int     @id @default(autoincrement())
+  type        String  @unique
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  agent_price Int     @unique
+  agents      Agents[]
+}
+model Bill {
+  id          Int     @id @default(autoincrement())
+  user        User    @relation(fields: [userId], references: [id])
+  userId      Int
+  agent       Agents  @relation(fields: [agentId], references: [id])
+  agentId     Int
+  price       Int
+  createdAt   DateTime @default(now())
+}
+model Subscription {
+  id          Int     @id @default(autoincrement())
+  user        User    @relation(fields: [userId], references: [id])
+  userId      Int
+  agent       Agents  @relation(fields: [agentId], references: [id])
+  agentId     Int
+  type        SubscriptionType
+  startDate   DateTime @default(now())
+  expiryDate  DateTime
+}
+enum SubscriptionType {
+  MONTHLY
+  YEARLY
+}
