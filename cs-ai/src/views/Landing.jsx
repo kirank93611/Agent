@@ -113,10 +113,11 @@ const Landing = () => {
                   sx={{ 
                     fontSize: { xs: '2.5rem', md: '3.5rem' },
                     fontWeight: 700,
-                    mb: 3
+                    mb: 3,
+                    paddingRight:'80px'
                   }}
                 >
-                  Transform Your Operations with AI
+                  Transform Your Support,On-boarding,QA Operations with AI
                 </Typography>
                 <Typography 
                   variant="h2" 

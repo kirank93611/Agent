@@ -27,6 +27,8 @@ import {
   Close
 } from '@mui/icons-material';
 import Logo from '../../common/Logo';
+import ChatIcon from '@mui/icons-material/Chat';
+import ChatbotIcon from '../../chatbot/ChatbotIcon';
 
 const SIDE_NAV_WIDTH = 280;
 const MOBILE_BREAKPOINT = 'lg';
@@ -64,6 +66,11 @@ const Sidebar = ({ open, onClose }) => {
       title: 'Agents',
       path: '/dashboard/agents',
       icon: <AgentIcon />
+    },
+    {
+      title:'AiChat',
+      path:'/dashboard/ai-chat',
+      icon:<ChatIcon />
     }
   ];
 
@@ -117,7 +124,7 @@ const Sidebar = ({ open, onClose }) => {
               color="neutral.400"
               variant="body2"
             >
-              Production
+              Development-Staging
             </Typography>
           </div>
         </Box>

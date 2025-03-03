@@ -8,6 +8,7 @@ import Account from '../views/Account';
 import Login from '../views/Login';
 import Landing from '../views/Landing';
 import Contact from '../views/Contact';
+import AiChat from '../views/AiChat';
 
 const routes = [
   {
@@ -28,6 +29,7 @@ const routes = [
     children: [
       { path: '', element: <Overview /> },
       { path: 'customers', element: <Customers /> },
+      { path:'ai-chat',element:<AiChat/>},
       { path: 'agents', element: <Agents /> },
       { path: 'settings', element: <Settings /> },
       { path: 'settings/account', element: <Account /> }
