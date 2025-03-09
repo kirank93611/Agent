@@ -1,216 +1,183 @@
 # CS-AI: AI-Powered Operations Platform 🚀
 
-![Project Banner](src/assets/images/login-bg.jpg)
+Transform your operational workflows with AI-powered automation. Achieve higher CSAT scores, streamline compliance processes, and empower your team to focus on strategic initiatives.
 
-## 📚 Table of Contents
-- [Project Overview](#project-overview)
-- [Project Structure](#project-structure)
-- [Tech Stack](#tech-stack)
-- [Getting Started](#getting-started)
-- [Learning Path](#learning-path)
-- [Development Guide](#development-guide)
-- [Resources](#resources)
+## 🎯 Features
 
-## 🎯 Project Overview
-
-CS-AI is a modern React application that transforms operational efficiency using AI. Features include:
-- 📈 95%+ Support CSAT Achievement
-- 🔍 Compliance Vetting & Documentation
-- 🚀 Customer Onboarding & Support
+- 📈 95%+ CSAT Achievement Rate
+- 🤖 AI-Powered Support Automation
+- 🔒 Automated Compliance Checks
 - ⚡ Operational Task Management
+- 📊 Real-time Analytics
+- 🔄 Workflow Optimization
 
-## 🏗️ Project Structure
+## 🛠 Tech Stack
 
-```bash
-cs-ai/
-├── public/                  # Static files
-│   ├── index.html          # Main HTML file
-│   └── assets/             # Public assets
-│
-├── src/
-│   ├── assets/            # Application assets
-│   │   ├── images/        # Image files
-│   │   └── styles/        # Global styles
-│   │
-│   ├── components/        # Reusable components
-│   │   ├── common/        # Shared components
-│   │   └── layout/        # Layout components
-│   │
-│   ├── features/          # Feature modules
-│   ├── views/             # Page components
-│   ├── routes/            # Routing config
-│   ├── theme/             # Theme setup
-│   ├── utils/            # Utilities
-│   ├── services/         # API services
-│   ├── hooks/            # Custom hooks
-│   └── store/            # State management
-```
+### Frontend
+- React.js 18
+- Material-UI (MUI) v5
+- Framer Motion
+- React Router v6
+- Context API
 
-## 💻 Tech Stack
+### Backend
+- Node.js
+- Express
+- PostgreSQL
+- Prisma ORM
+- Redis
+- JWT Authentication
 
-### Core Technologies
-\`\`\`javascript
-// Modern React with Hooks
-const Component = () => {
-  const [state, setState] = useState();
-  useEffect(() => {
-    // Side effects
-  }, []);
-  return <div>...</div>;
-}
-\`\`\`
-
-### 🎨 UI Framework: Material-UI (MUI v5)
-\`\`\`javascript
-// Styled components with MUI
-const StyledBox = styled(Box)(({ theme }) => ({
-  padding: theme.spacing(2),
-  background: 'linear-gradient(45deg, #f5f9ff 30%, #e6f0ff 90%)',
-  borderRadius: theme.shape.borderRadius
-}));
-\`\`\`
-
-### 🌟 Key Features
-1. **Modern React (18.x)**
-   - Functional Components
-   - React Hooks
-   - Context API
-
-2. **Material-UI**
-   - Custom Theming
-   - Responsive Design
-   - CSS-in-JS
-
-3. **Animations**
-   - Framer Motion
-   - Smooth Transitions
-   - Interactive UI
-
-4. **Routing**
-   - React Router v6
-   - Protected Routes
-   - Nested Layouts
-
-## 🚀 Getting Started
+## 🚀 Quick Start
 
 1. **Clone the repository**
-\`\`\`bash
-git clone https://github.com/yourusername/cs-ai.git
-cd cs-ai
-\`\`\`
+   ```bash
+   git clone https://github.com/yourusername/cs-ai.git
+   cd cs-ai
+   ```
 
 2. **Install dependencies**
-\`\`\`bash
-npm install
-\`\`\`
+   ```bash
+   npm install
+   ```
 
-3. **Start development server**
-\`\`\`bash
-npm start
-\`\`\`
+3. **Set up environment variables**
+   ```bash
+   cp .env.example .env
+   # Edit .env with your configuration
+   ```
 
-## 📚 Learning Path
+4. **Start development server**
+   ```bash
+   npm start
+   ```
 
-### Week 1-2: JavaScript & React Fundamentals
-- ES6+ Features
-- React Components
-- React Hooks
-- JSX Syntax
+## 📦 Deployment Guide
 
-### Week 3-4: UI Development
-- Material-UI Components
-- Theme Customization
-- Responsive Design
-- CSS-in-JS
-
-### Week 5: Navigation & Routing
-- React Router Setup
-- Protected Routes
-- Navigation Patterns
-
-### Week 6: Animations
-- Framer Motion
-- Transitions
-- Gesture Handling
-
-### Week 7: State Management
-- Component State
-- Context API
-- Data Flow
-
-### Week 8: Best Practices
-- Code Organization
-- Performance
-- Testing
-
-## 🛠️ Development Guide
-
-### Component Structure
-\`\`\`javascript
-// Example component structure
-import { useState, useEffect } from 'react';
-import { Box, Typography } from '@mui/material';
-import { motion } from 'framer-motion';
-
-const Component = () => {
-  // State management
-  const [data, setData] = useState(null);
-
-  // Side effects
-  useEffect(() => {
-    // Component logic
-  }, []);
-
-  // Render
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-    >
-      <Box>
-        <Typography>Content</Typography>
-      </Box>
-    </motion.div>
-  );
-};
-\`\`\`
-
-### Styling Guide
-\`\`\`javascript
-// Theme colors
-const colors = {
-  primary: '#1a365d',
-  secondary: '#2d4a77',
-  background: 'linear-gradient(45deg, #f5f9ff 30%, #e6f0ff 90%)'
-};
-
-// Component styling
-const StyledComponent = styled(Box)(({ theme }) => ({
-  padding: theme.spacing(2),
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: theme.palette.background.paper
-}));
-\`\`\`
-
-## 📚 Resources
-
-### Official Documentation
-- [React Documentation](https://reactjs.org/docs/getting-started.html)
-- [Material-UI](https://mui.com/getting-started/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [React Router](https://reactrouter.com/docs/en/v6)
-
-### Development Tools
-- VS Code
-- Chrome DevTools
+### Prerequisites
+- Node.js v16 or higher
+- npm v7 or higher
 - Git
-- npm/yarn
 
-### Recommended Extensions
-- ESLint
-- Prettier
-- GitLens
-- Material Icon Theme
+### Environment Setup
+
+1. **Create environment files**
+   ```bash
+   # Development
+   cp .env.example .env.development
+   
+   # Staging
+   cp .env.example .env.staging
+   
+   # Production
+   cp .env.example .env.production
+   ```
+
+2. **Configure environment variables**
+   - Set `REACT_APP_API_URL` to your backend API URL
+   - Add your OpenAI API key for AI chat functionality
+   - Configure other environment-specific variables
+
+### Build & Deploy
+
+1. **Development Build**
+   ```bash
+   npm run build
+   ```
+
+2. **Staging Build**
+   ```bash
+   npm run build:staging
+   ```
+
+3. **Production Build**
+   ```bash
+   npm run build:prod
+   ```
+
+### Deployment Options
+
+1. **Vercel (Recommended)**
+   - Connect your GitHub repository
+   - Configure environment variables
+   - Auto-deploys on push to main branch
+
+2. **Netlify**
+   - Connect your GitHub repository
+   - Set build command: `npm run build:prod`
+   - Set publish directory: `build`
+
+3. **Manual Deployment**
+   ```bash
+   # Build the project
+   npm run build:prod
+   
+   # Deploy to your server
+   rsync -avz build/ user@your-server:/path/to/deployment
+   ```
+
+### Post-Deployment Checklist
+
+- [ ] Verify environment variables
+- [ ] Check API connectivity
+- [ ] Test AI chat functionality
+- [ ] Monitor error logging
+- [ ] Check performance metrics
+
+## 🧪 Testing
+
+```bash
+# Run all tests
+npm test
+
+# Run tests with coverage
+npm test -- --coverage
+
+# Run specific test file
+npm test -- src/components/chat/__tests__/ChatWindow.test.js
+```
+
+## 📝 Development Guidelines
+
+1. **Code Style**
+   - Follow ESLint configuration
+   - Use Prettier for formatting
+   - Follow component naming conventions
+
+2. **Git Workflow**
+   ```bash
+   # Create feature branch
+   git checkout -b feature/your-feature
+   
+   # Make changes and commit
+   git add .
+   git commit -m "feat: add new feature"
+   
+   # Push changes
+   git push origin feature/your-feature
+   ```
+
+3. **Environment Variables**
+   - Never commit actual .env files
+   - Update .env.example when adding new variables
+   - Document all environment variables
+
+## 🔐 Security Best Practices
+
+1. **API Keys**
+   - Store sensitive keys in environment variables
+   - Never commit API keys to version control
+   - Rotate keys regularly
+
+2. **Authentication**
+   - Use JWT for API authentication
+   - Implement token refresh mechanism
+   - Set secure cookie options
+
+3. **Data Protection**
+   - Encrypt sensitive data
+   - Implement rate limiting
+   - Use HTTPS in production
 
 ## 🤝 Contributing
 
@@ -218,11 +185,15 @@ const StyledComponent = styled(Box)(({ theme }) => ({
 2. Create your feature branch
 3. Commit your changes
 4. Push to the branch
-5. Create a Pull Request
+5. Open a Pull Request
 
-## 📝 License
+## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🆘 Support
+
+For support, email support@example.com or join our Slack channel.
 
 ---
 

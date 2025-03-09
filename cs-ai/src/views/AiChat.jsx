@@ -1,51 +1,69 @@
-import { Box,Container,Typography } from "@mui/system";
-import ChatbotIcon from "../components/chatbot/ChatbotIcon";
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import React, { useState } from 'react';
+import { Box, Container, IconButton, useTheme } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { motion, AnimatePresence } from 'framer-motion';
+import AgentSelector from '../components/chat/AgentSelector';
+import ChatWindow from '../components/chat/ChatWindow';
 
-const AiChat=()=>{
-    return(
-        <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          py: 8
-        }}
-      >
-        <div className="chatbot-popup">
-          <div className="chat-header">
-            <div className="header-info">
-              <ChatbotIcon/>
-              <h2 className="logo-text">Chatbot</h2>
-            </div>
-            <button>
-                <KeyboardArrowDownIcon />
-                </button>
-          </div>
+const AiChat = () => {
+  const [selectedAgent, setSelectedAgent] = useState(null);
+  const theme = useTheme();
 
-          {/* Chatbot Body */}
-          <div className="chat-body">
-            <div className="message bot-message">
-                <ChatbotIcon></ChatbotIcon>
-                <p>Hey There! <br/> How can i Help you today ? </p>
-            </div>
-            <div className="message user-message">
-                <p className="message-text">Lorem ipsum dolor, si</p>
-            </div>
-          </div>
+  const handleAgentSelect = (agent) => {
+    setSelectedAgent(agent);
+  };
 
-        {/* Chatbot Footer */}
-          <div className="chat-footer">
-            <form action="#" className="chat-form">
-                <input type="text" placeholder="message" className="message-input" required />
-                <button>
-                    <KeyboardArrowUpIcon />
-                </button>
-            </form>
-          </div>  
-        </div>
-      </Box>
-    )
-}
+  const handleBack = () => {
+    setSelectedAgent(null);
+  };
+
+  return (
+    <Box sx={{ height: '100%', width: '100%' }}>
+      <AnimatePresence mode="wait">
+        {!selectedAgent ? (
+          <motion.div
+            key="selector"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            transition={{ duration: 0.3 }}
+            style={{ height: '100%' }}
+          >
+            <AgentSelector onSelect={handleAgentSelect} />
+          </motion.div>
+        ) : (
+          <motion.div
+            key="chat"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.3 }}
+            style={{ height: '100%' }}
+          >
+            <Box sx={{ height: '100%', position: 'relative' }}>
+              <IconButton
+                onClick={handleBack}
+                sx={{
+                  position: 'absolute',
+                  top: theme.spacing(1),
+                  left: theme.spacing(1),
+                  zIndex: 1,
+                  bgcolor: theme.palette.background.paper,
+                  boxShadow: theme.shadows[2],
+                  '&:hover': {
+                    bgcolor: theme.palette.background.paper
+                  }
+                }}
+              >
+                <ArrowBackIcon />
+              </IconButton>
+              <ChatWindow agent={selectedAgent} />
+            </Box>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </Box>
+  );
+};
 
 export default AiChat;
