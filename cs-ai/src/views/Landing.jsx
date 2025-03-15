@@ -1,7 +1,7 @@
 import { Box, Container, Typography, Button, Grid, useTheme, useMediaQuery } from '@mui/material';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import WorkflowDiagram from '../components/common/WorkflowDiagram';
+// import WorkflowDiagram from '../components/common/WorkflowDiagram';
 
 const Landing = () => {
   const theme = useTheme();
@@ -155,7 +155,8 @@ const Landing = () => {
                 animate="visible"
                 variants={scaleIn}
               >
-                <WorkflowDiagram />
+                {/* <WorkflowDiagram /> */}
+                <Box sx={{ height: 400, bgcolor: 'rgba(255,255,255,0.1)', borderRadius: 2 }} />
               </motion.div>
             </Grid>
           </Grid>

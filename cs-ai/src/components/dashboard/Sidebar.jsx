@@ -25,6 +25,11 @@ import {
   ExpandMore
 } from '@mui/icons-material';
 import { Logo } from './logo';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import PeopleIcon from '@mui/icons-material/People';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import SettingsIcon from '@mui/icons-material/Settings';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const SIDE_NAV_WIDTH = 280;
 
@@ -39,30 +44,13 @@ const Sidebar = ({ open, onClose }) => {
     setSettingsOpen(!settingsOpen);
   };
 
-  const items = [
-    {
-      title: 'Overview',
-      path: '/dashboard',
-      icon: <ChartBarIcon />
-    },
-    {
-      title: 'Customers',
-      path: '/dashboard/customers',
-      icon: <UsersIcon />
-    },
-    {
-      title: 'Agents',
-      path: '/dashboard/agents',
-      icon: <AgentIcon />
-    }
-  ];
-
   const content = (
     <Box
       sx={{
         display: 'flex',
         flexDirection: 'column',
         height: '100%',
+        backgroundColor: '#1F2937',
       }}
     >
       <Box sx={{ p: 3 }}>
@@ -78,7 +66,6 @@ const Sidebar = ({ open, onClose }) => {
         <Box
           sx={{
             alignItems: 'center',
-            backgroundColor: 'rgba(255, 255, 255, 0.04)',
             borderRadius: 1,
             cursor: 'pointer',
             display: 'flex',
@@ -89,7 +76,7 @@ const Sidebar = ({ open, onClose }) => {
         >
           <div>
             <Typography
-              color="inherit"
+              color="white"
               variant="subtitle1"
             >
               CS-AI
@@ -113,9 +100,13 @@ const Sidebar = ({ open, onClose }) => {
         }}
       >
         <List>
-          {items.map((item) => (
+          {[
+            { text: 'Overview', icon: <DashboardIcon />, path: '/dashboard' },
+            { text: 'Customers', icon: <PeopleIcon />, path: '/dashboard/customers' },
+            { text: 'Account', icon: <AccountCircleIcon />, path: '/dashboard/account' },
+          ].map((item) => (
             <ListItemButton
-              key={item.title}
+              key={item.text}
               onClick={() => navigate(item.path)}
               selected={location.pathname === item.path}
               sx={{
@@ -129,13 +120,13 @@ const Sidebar = ({ open, onClose }) => {
                 }
               }}
             >
-              <ListItemIcon sx={{ color: 'neutral.400' }}>
+              <ListItemIcon sx={{ color: 'white' }}>
                 {item.icon}
               </ListItemIcon>
               <ListItemText 
-                primary={item.title}
+                primary={item.text}
                 primaryTypographyProps={{
-                  color: 'neutral.400',
+                  color: 'white',
                   fontWeight: 'medium'
                 }}
               />
@@ -151,17 +142,17 @@ const Sidebar = ({ open, onClose }) => {
               }
             }}
           >
-            <ListItemIcon sx={{ color: 'neutral.400' }}>
+            <ListItemIcon sx={{ color: 'white' }}>
               <CogIcon />
             </ListItemIcon>
             <ListItemText 
               primary="Settings"
               primaryTypographyProps={{
-                color: 'neutral.400',
+                color: 'white',
                 fontWeight: 'medium'
               }}
             />
-            {settingsOpen ? <ExpandLess sx={{ color: 'neutral.400' }} /> : <ExpandMore sx={{ color: 'neutral.400' }} />}
+            {settingsOpen ? <ExpandLess sx={{ color: 'white' }} /> : <ExpandMore sx={{ color: 'white' }} />}
           </ListItemButton>
           <Collapse in={settingsOpen} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
@@ -180,39 +171,13 @@ const Sidebar = ({ open, onClose }) => {
                   }
                 }}
               >
-                <ListItemIcon sx={{ color: 'neutral.400' }}>
+                <ListItemIcon sx={{ color: 'white' }}>
                   <CogIcon />
                 </ListItemIcon>
                 <ListItemText 
                   primary="General"
                   primaryTypographyProps={{
-                    color: 'neutral.400',
-                    fontWeight: 'medium'
-                  }}
-                />
-              </ListItemButton>
-              <ListItemButton
-                onClick={() => navigate('/dashboard/settings/account')}
-                selected={location.pathname === '/dashboard/settings/account'}
-                sx={{
-                  pl: 4,
-                  borderRadius: 1,
-                  mb: 0.5,
-                  '&.Mui-selected': {
-                    backgroundColor: 'rgba(255, 255, 255, 0.08)'
-                  },
-                  '&:hover': {
-                    backgroundColor: 'rgba(255, 255, 255, 0.04)'
-                  }
-                }}
-              >
-                <ListItemIcon sx={{ color: 'neutral.400' }}>
-                  <UserCircleIcon />
-                </ListItemIcon>
-                <ListItemText 
-                  primary="Account"
-                  primaryTypographyProps={{
-                    color: 'neutral.400',
+                    color: 'white',
                     fontWeight: 'medium'
                   }}
                 />
@@ -229,13 +194,19 @@ const Sidebar = ({ open, onClose }) => {
         }}
       >
         <Button
-          color="warning"
           fullWidth
+          startIcon={<LogoutIcon />}
           onClick={() => {
             localStorage.removeItem('token');
             navigate('/login');
           }}
-          variant="contained"
+          sx={{
+            backgroundColor: '#ED6C02',
+            color: 'white',
+            '&:hover': {
+              backgroundColor: '#C55A02'
+            }
+          }}
         >
           Logout
         </Button>
@@ -250,8 +221,8 @@ const Sidebar = ({ open, onClose }) => {
         open
         PaperProps={{
           sx: {
-            backgroundColor: 'neutral.800',
-            color: 'common.white',
+            backgroundColor: '#1F2937',
+            color: 'white',
             width: SIDE_NAV_WIDTH
           }
         }}
@@ -269,8 +240,8 @@ const Sidebar = ({ open, onClose }) => {
       open={open}
       PaperProps={{
         sx: {
-          backgroundColor: 'neutral.800',
-          color: 'common.white',
+          backgroundColor: '#1F2937',
+          color: 'white',
           width: SIDE_NAV_WIDTH
         }
       }}
