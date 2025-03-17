@@ -1,69 +1,79 @@
 import React, { useState } from 'react';
-import { Box, Container, IconButton, useTheme } from '@mui/material';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { motion, AnimatePresence } from 'framer-motion';
-import AgentSelector from '../components/chat/AgentSelector';
+import { Box, Container, Typography, Dialog } from '@mui/material';
+import { motion } from 'framer-motion';
 import ChatWindow from '../components/chat/ChatWindow';
+import AgentSelector from '../components/chat/AgentSelector';
 
-const AiChat = () => {
+const AIChat = () => {
   const [selectedAgent, setSelectedAgent] = useState(null);
-  const theme = useTheme();
+  const [isAgentSelectorOpen, setIsAgentSelectorOpen] = useState(true);
 
   const handleAgentSelect = (agent) => {
     setSelectedAgent(agent);
-  };
-
-  const handleBack = () => {
-    setSelectedAgent(null);
+    setIsAgentSelectorOpen(false);
   };
 
   return (
-    <Box sx={{ height: '100%', width: '100%' }}>
-      <AnimatePresence mode="wait">
-        {!selectedAgent ? (
-          <motion.div
-            key="selector"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 20 }}
-            transition={{ duration: 0.3 }}
-            style={{ height: '100%' }}
-          >
-            <AgentSelector onSelect={handleAgentSelect} />
-          </motion.div>
-        ) : (
-          <motion.div
-            key="chat"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            transition={{ duration: 0.3 }}
-            style={{ height: '100%' }}
-          >
-            <Box sx={{ height: '100%', position: 'relative' }}>
-              <IconButton
-                onClick={handleBack}
-                sx={{
-                  position: 'absolute',
-                  top: theme.spacing(1),
-                  left: theme.spacing(1),
-                  zIndex: 1,
-                  bgcolor: theme.palette.background.paper,
-                  boxShadow: theme.shadows[2],
-                  '&:hover': {
-                    bgcolor: theme.palette.background.paper
-                  }
-                }}
-              >
-                <ArrowBackIcon />
-              </IconButton>
-              <ChatWindow agent={selectedAgent} />
-            </Box>
-          </motion.div>
-        )}
-      </AnimatePresence>
+    <Box
+      component={motion.div}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      sx={{
+        flexGrow: 1,
+        height: '100vh',
+        overflow: 'hidden',
+        display: 'flex',
+        flexDirection: 'column'
+      }}
+    >
+      <Box
+        sx={{
+          bgcolor: 'background.paper',
+          borderBottom: 1,
+          borderColor: 'divider',
+          py: 2
+        }}
+      >
+        <Container maxWidth="lg">
+          <Typography variant="h6" color="text.primary">
+            {selectedAgent ? selectedAgent.name : 'Select an AI Agent'}
+          </Typography>
+        </Container>
+      </Box>
+      
+      <Box sx={{ flexGrow: 1, overflow: 'hidden' }}>
+        <Container
+          maxWidth="lg"
+          sx={{
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            pt: 2,
+            pb: 2
+          }}
+        >
+          {selectedAgent ? (
+            <ChatWindow agent={selectedAgent} />
+          ) : (
+            <Dialog
+              open={isAgentSelectorOpen}
+              maxWidth="md"
+              fullWidth
+              PaperProps={{
+                sx: {
+                  borderRadius: 2,
+                  maxHeight: '90vh'
+                }
+              }}
+            >
+              <AgentSelector onSelect={handleAgentSelect} />
+            </Dialog>
+          )}
+        </Container>
+      </Box>
     </Box>
   );
 };
 
-export default AiChat;
+export default AIChat;

@@ -6,8 +6,17 @@ import CampaignIcon from '@mui/icons-material/Campaign';
 import SecurityIcon from '@mui/icons-material/Security';
 import AnalyticsIcon from '@mui/icons-material/Analytics';
 import AutomationIcon from '@mui/icons-material/AutoFixHigh';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 const agents = [
+  {
+    id: 'linkedin-ai',
+    name: 'LinkedIn AI Agent',
+    description: 'Optimize your LinkedIn profile and professional networking',
+    icon: LinkedInIcon,
+    color: '#0A66C2',
+    capabilities: ['Profile Optimization', 'Content Creation', 'Network Growth']
+  },
   {
     id: 'customer-support',
     name: 'Customer Support Agent',
@@ -60,17 +69,6 @@ const AgentSelector = ({ onSelect }) => {
 
   return (
     <Box sx={{ p: 3, bgcolor: 'background.default' }}>
-      <Typography 
-        variant="h4" 
-        sx={{ 
-          mb: 4, 
-          color: '#1a365d',
-          fontWeight: 700,
-          fontFamily: theme.typography.fontFamily
-        }}
-      >
-        Select an AI Agent
-      </Typography>
       <Grid container spacing={3}>
         {agents.map((agent, index) => (
           <Grid item xs={12} sm={6} md={4} key={agent.id}>

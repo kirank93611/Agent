@@ -6,12 +6,7 @@ import CssBaseline from '@mui/material/CssBaseline'
 import theme from './theme'
 import routes from './routes'
 
-const router = createBrowserRouter(routes, {
-  future: {
-    v7_startTransition: true,
-    v7_relativeSplatPath: true
-  }
-});
+const router = createBrowserRouter(routes)
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

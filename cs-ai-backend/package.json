@@ -11,12 +11,22 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@prisma/client": "^6.4.1",
+    "@pinecone-database/pinecone": "^5.1.1",
+    "@prisma/client": "^6.5.0",
     "bcrypt": "^5.1.1",
+    "bullmq": "^5.43.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "gpt-3-encoder": "^1.1.4",
+    "ioredis": "^5.6.0",
     "jsonwebtoken": "^9.0.2",
     "langchain": "^0.3.19",
-    "openai": "^4.86.2",
+    "openai": "^4.87.3",
     "pinecone-client": "^2.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9",
+    "prisma": "^6.5.0"
   }
 }

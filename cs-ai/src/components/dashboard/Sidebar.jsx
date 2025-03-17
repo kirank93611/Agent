@@ -22,7 +22,8 @@ import {
   People as UsersIcon,
   SmartToy as AgentIcon,
   ExpandLess,
-  ExpandMore
+  ExpandMore,
+  Chat as ChatIcon
 } from '@mui/icons-material';
 import { Logo } from './logo';
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -104,6 +105,8 @@ const Sidebar = ({ open, onClose }) => {
             { text: 'Overview', icon: <DashboardIcon />, path: '/dashboard' },
             { text: 'Customers', icon: <PeopleIcon />, path: '/dashboard/customers' },
             { text: 'Account', icon: <AccountCircleIcon />, path: '/dashboard/account' },
+            { text: 'AI Chat', icon: <ChatIcon />, path: '/dashboard/chat' },
+            { text: 'AI Agents', icon: <AgentIcon />, path: '/dashboard/agents' },
           ].map((item) => (
             <ListItemButton
               key={item.text}

@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     const { topic } = req.body;
 
     const response = await openai.chat.completions.create({
-        model: "gpt-4-turbo",
+        model: "gpt-3-turbo",
         messages: [{ role: "user", content: `Generate an engaging LinkedIn post about ${topic}` }],
     });
 

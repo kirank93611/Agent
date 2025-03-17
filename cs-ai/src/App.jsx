@@ -1,25 +1,24 @@
 import React, { Suspense } from 'react';
-import { useRoutes } from 'react-router-dom';
-import routes from '../src/routes/index.jsx';
 import { Box, CircularProgress } from '@mui/material';
+import { Outlet } from 'react-router-dom';
 
 function App() {
-  const content = useRoutes(routes);
-
   return (
-    <Suspense fallback={
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          minHeight: '100vh'
-        }}
-      >
-        <CircularProgress />
-      </Box>
-    }>
-      {content}
+    <Suspense 
+      fallback={
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            minHeight: '100vh'
+          }}
+        >
+          <CircularProgress />
+        </Box>
+      }
+    >
+      <Outlet />
     </Suspense>
   );
 }
