@@ -1,23 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
-import {
-  Box,
-  TextField,
-  IconButton,
-  Paper,
-  Typography,
-  Avatar,
-  CircularProgress,
-  useTheme,
-  Button,
-  Grid,
-  Card,
-  CardContent
-} from '@mui/material';
-import { Send as SendIcon, SmartToy as AIIcon, Close as CloseIcon, SupportAgent as SupportAgentIcon } from '@mui/icons-material';
 import MessageList from './MessageList';
 import AITypingIndicator from './AITypingIndicator';
 import ResponseBubble from './ResponseBubble';
 import aiService from '../../services/aiService';
+import './ChatInterface.css';
+// lightweight icon placeholders (no MUI icons)
+const MenuIcon = () => <svg width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg>;
+const CloseIcon = () => <svg width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M18.3 5.71L12 12l6.3 6.29-1.41 1.42L10.59 13.4 4.29 19.71 2.88 18.3 9.18 12 2.88 5.71 4.29 4.29 10.59 10.6 16.88 4.29z"/></svg>;
+const SendIcon = () => <svg width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>;
+const SupportAgentIcon = () => <span>🛟</span>;
+const AIIcon = () => <span>🤖</span>;
 
 // Simplified agent data
 const agentData = [
@@ -48,12 +40,11 @@ const ChatInterface = () => {
   const [isAgentSelectorOpen, setIsAgentSelectorOpen] = useState(true);
   const [selectedAgent, setSelectedAgent] = useState(null);
   const messagesEndRef = useRef(null);
-  const theme = useTheme();
 
   const scrollToBottom = () => {
     if (messagesEndRef.current) {
-      const messageContainer = messagesEndRef.current.parentElement;
-      messageContainer.scrollTop = messageContainer.scrollHeight;
+      const messageContainer = messagesEndRef.current.closest('.ci-messages');
+      if (messageContainer) messageContainer.scrollTop = messageContainer.scrollHeight;
     }
   };
 
@@ -132,325 +123,74 @@ const ChatInterface = () => {
   // Show agent selector if no agent is selected and the selector is open
   if (!selectedAgent && isAgentSelectorOpen) {
     return (
-      <Paper 
-        elevation={0} 
-        sx={{ 
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          display: 'flex',
-          flexDirection: 'column',
-          bgcolor: '#f5f7fa',
-          zIndex: 9999,
-          p: 4,
-          overflow: 'auto'
-        }}
-      >
-        <Box sx={{ 
-          maxWidth: 1200, 
-          width: '100%', 
-          mx: 'auto',
-          mb: 6
-        }}>
-          {/* Top header with title and close button */}
-          <Box sx={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            justifyContent: 'space-between',
-            mb: 4,
-            pb: 2,
-            borderBottom: '2px solid #e0e0e0'
-          }}>
-            <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#1a365d' }}>
-              Select an AI Agent
-            </Typography>
-            
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleClose}
-              startIcon={<CloseIcon />}
-              size="large"
-              sx={{ py: 1, px: 3 }}
-            >
-              Skip Selection
-            </Button>
-          </Box>
-          
-          {/* Agent cards */}
-          <Grid container spacing={4}>
+      <div className="ci-selector-root">
+        <div className="ci-selector-inner">
+          <header className="ci-selector-header">
+            <h2>Select an AI Agent</h2>
+            <button className="ci-close-btn" onClick={handleClose} aria-label="Skip selection">Skip</button>
+          </header>
+
+          <div className="ci-agent-grid">
             {agentData.map((agent) => (
-              <Grid item xs={12} sm={6} md={4} key={agent.id}>
-                <Card 
-                  onClick={() => handleAgentSelect(agent)}
-                  sx={{ 
-                    cursor: 'pointer',
-                    height: '100%',
-                    borderRadius: 2,
-                    transition: 'all 0.2s ease',
-                    '&:hover': {
-                      transform: 'translateY(-8px)',
-                      boxShadow: '0 12px 20px rgba(0,0,0,0.1)'
-                    }
-                  }}
-                >
-                  <CardContent sx={{ p: 3 }}>
-                    <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                      <Avatar 
-                        sx={{ 
-                          bgcolor: agent.color,
-                          width: 48,
-                          height: 48
-                        }}
-                      >
-                        <SupportAgentIcon />
-                      </Avatar>
-                      <Typography variant="h6" sx={{ ml: 2, fontWeight: 'bold' }}>
-                        {agent.name}
-                      </Typography>
-                    </Box>
-                    <Typography variant="body1" sx={{ mb: 2, color: '#555' }}>
-                      {agent.description}
-                    </Typography>
-                    <Button 
-                      variant="outlined" 
-                      fullWidth
-                      sx={{ 
-                        mt: 2,
-                        borderColor: agent.color,
-                        color: agent.color,
-                        '&:hover': {
-                          borderColor: agent.color,
-                          backgroundColor: `${agent.color}10`
-                        }
-                      }}
-                    >
-                      Select Agent
-                    </Button>
-                  </CardContent>
-                </Card>
-              </Grid>
+              <div className="ci-agent-card" key={agent.id} onClick={() => handleAgentSelect(agent)}>
+                <div className="ci-agent-top">
+                  <div className="ci-avatar" style={{ backgroundColor: agent.color }}>
+                    <SupportAgentIcon />
+                  </div>
+                  <div className="ci-agent-name">{agent.name}</div>
+                </div>
+                <p className="ci-agent-desc">{agent.description}</p>
+                <button className="ci-select-btn">Select Agent</button>
+              </div>
             ))}
-          </Grid>
-          
-          {/* Bottom close button */}
-          <Box sx={{ 
-            display: 'flex', 
-            justifyContent: 'center', 
-            mt: 8,
-            mb: 4 
-          }}>
-            <Button
-              variant="contained"
-              color="error"
-              size="large"
-              onClick={handleClose}
-              startIcon={<CloseIcon />}
-              sx={{ 
-                py: 1.5, 
-                px: 4,
-                fontWeight: 'bold',
-                fontSize: '1rem'
-              }}
-            >
-              CLOSE WITHOUT SELECTING
-            </Button>
-          </Box>
-        </Box>
-      </Paper>
+          </div>
+
+          <div className="ci-selector-footer">
+            <button className="ci-cancel-btn" onClick={handleClose}>CLOSE WITHOUT SELECTING</button>
+          </div>
+        </div>
+      </div>
     );
   }
 
   // Show chat interface if agent is selected or selector is closed
   return (
-    <Box
-      sx={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        display: 'grid',
-        gridTemplateRows: 'auto 1fr auto',
-        bgcolor: theme.palette.background.default,
-        overflow: 'hidden'
-      }}
-    >
+    <div className="ci-root">
       {/* Header */}
-      <Box
-        sx={{
-          p: 2,
-          borderBottom: `1px solid ${theme.palette.divider}`,
-          bgcolor: theme.palette.background.paper,
-          boxShadow: '0 2px 4px rgba(0,0,0,0.04)'
-        }}
-      >
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-          <Avatar
-            sx={{
-              bgcolor: selectedAgent?.color || theme.palette.primary.main,
-              width: 40,
-              height: 40,
-              boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-            }}
-          >
-            <AIIcon 
-              sx={{ 
-                fontSize: 24, 
-                color: 'white',
-                filter: 'drop-shadow(0 1px 1px rgba(0,0,0,0.1))'
-              }} 
-            />
-          </Avatar>
-          <Box>
-            <Typography
-              variant="h6"
-              sx={{
-                color: theme.palette.text.primary,
-                fontWeight: 600,
-                lineHeight: 1.2
-              }}
-            >
-              {selectedAgent?.name || 'AI Assistant'}
-            </Typography>
-            <Typography
-              variant="body2"
-              sx={{
-                color: theme.palette.text.secondary,
-                display: 'flex',
-                alignItems: 'center',
-                gap: 0.5
-              }}
-            >
-              <Box
-                component="span"
-                sx={{
-                  width: 6,
-                  height: 6,
-                  borderRadius: '50%',
-                  bgcolor: '#4caf50',
-                  display: 'inline-block'
-                }}
-              />
-              Online
-            </Typography>
-          </Box>
-        </Box>
-      </Box>
+      <header className="ci-header">
+        <div className="ci-header-left">
+          <div className="ci-avatar-large" style={{ backgroundColor: selectedAgent?.color || '#1a365d' }}>
+            <AIIcon style={{ color: '#fff' }} />
+          </div>
+          <div>
+            <div className="ci-title">{selectedAgent?.name || 'AI Assistant'}</div>
+            <div className="ci-status">● Online</div>
+          </div>
+        </div>
+      </header>
 
       {/* Messages Container */}
-      <Box
-        sx={{
-          position: 'relative',
-          overflow: 'hidden',
-          display: 'flex',
-          flexDirection: 'column'
-        }}
-      >
-        <Box
-          sx={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            overflowY: 'auto',
-            p: 3,
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 2,
-            '&::-webkit-scrollbar': {
-              width: '8px',
-              backgroundColor: 'transparent'
-            },
-            '&::-webkit-scrollbar-thumb': {
-              backgroundColor: theme.palette.divider,
-              borderRadius: '4px',
-              '&:hover': {
-                backgroundColor: theme.palette.action.hover
-              }
-            }
-          }}
-        >
+      <div className="ci-messages-root">
+        <div className="ci-messages">
           <MessageList messages={messages} />
           {isAITyping && <AITypingIndicator />}
           <div ref={messagesEndRef} />
-        </Box>
-      </Box>
+        </div>
+      </div>
 
-      {/* Input Area */}
-      <Paper
-        component="form"
-        onSubmit={handleSendMessage}
-        elevation={8}
-        sx={{
-          p: 2,
-          display: 'flex',
-          alignItems: 'center',
-          gap: 2,
-          borderTop: `1px solid ${theme.palette.divider}`,
-          bgcolor: theme.palette.background.paper,
-          position: 'relative',
-          zIndex: 1
-        }}
-      >
-        <TextField
-          fullWidth
-          variant="outlined"
+      {/* Input area */}
+      <form className="ci-input" onSubmit={handleSendMessage}>
+        <textarea
+          className="ci-textarea"
           placeholder="Type your message..."
           value={inputMessage}
           onChange={(e) => setInputMessage(e.target.value)}
-          sx={{
-            '& .MuiOutlinedInput-root': {
-              borderRadius: 3,
-              backgroundColor: theme.palette.background.default,
-              '&:hover': {
-                backgroundColor: theme.palette.action.hover
-              },
-              '& fieldset': {
-                borderColor: theme.palette.divider
-              }
-            }
-          }}
         />
-        <IconButton
-          type="submit"
-          disabled={!inputMessage.trim() || isAITyping}
-          sx={{
-            width: 44,
-            height: 44,
-            borderRadius: '50%',
-            backgroundColor: theme.palette.primary.main,
-            color: 'white',
-            transition: 'all 0.2s ease-in-out',
-            '&:hover': {
-              backgroundColor: theme.palette.primary.dark,
-              transform: 'scale(1.05)'
-            },
-            '&.Mui-disabled': {
-              backgroundColor: theme.palette.action.disabledBackground,
-              color: theme.palette.action.disabled
-            },
-            '& .MuiSvgIcon-root': {
-              fontSize: 20,
-              filter: 'drop-shadow(0 1px 1px rgba(0,0,0,0.1))'
-            }
-          }}
-        >
-          {isAITyping ? (
-            <CircularProgress
-              size={20}
-              thickness={5}
-              sx={{ color: 'inherit' }}
-            />
-          ) : (
-            <SendIcon />
-          )}
-        </IconButton>
-      </Paper>
-    </Box>
+        <button className={`ci-send ${!inputMessage.trim() || isAITyping ? 'disabled' : ''}`} type="submit" disabled={!inputMessage.trim() || isAITyping}>
+          {isAITyping ? <span className="ci-spinner" /> : <SendIcon />}
+        </button>
+      </form>
+    </div>
   );
 };
 

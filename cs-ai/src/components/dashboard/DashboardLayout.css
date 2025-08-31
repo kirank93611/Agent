@@ -1,0 +1,5 @@
+.layout-root { display:flex; min-height:100vh; }
+.layout-content { flex:1; padding-top:64px; }
+.layout-container { padding-left: 280px; }
+.layout-main { padding: 32px; }
+@media (max-width: 1200px) { .layout-container { padding-left: 0; } }

@@ -1,0 +1,2 @@
+.logo-root { display:flex; align-items:center; justify-content:center; height:32px; }
+.logo-text { color: var(--primary-900); font-weight:700; }

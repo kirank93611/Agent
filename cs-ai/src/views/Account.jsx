@@ -1,24 +1,15 @@
-import { Box, Container, Typography } from '@mui/material';
+import React from 'react';
+import './views.css';
 
 const Account = () => {
   return (
-    <Box
-      component="main"
-      sx={{
-        flexGrow: 1,
-        py: 8
-      }}
-    >
-      <Container maxWidth="lg">
-        <Typography variant="h4" gutterBottom>
-          Account Settings
-        </Typography>
-        <Typography variant="body1">
-          Manage your account preferences and personal information.
-        </Typography>
-      </Container>
-    </Box>
+    <main className="view-root">
+      <div className="container">
+        <h1 className="view-title">Account Settings</h1>
+        <p className="view-desc">Manage your account preferences and personal information.</p>
+      </div>
+    </main>
   );
 };
 
-export default Account; 
+export default Account;

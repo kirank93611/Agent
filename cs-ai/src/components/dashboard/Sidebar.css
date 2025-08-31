@@ -1,0 +1,12 @@
+.sidebar { width:280px; background:#1F2937; color:#fff; position:fixed; top:0; bottom:0; left:0; padding:16px; display:flex; flex-direction:column; }
+.sidebar .logo-wrap { height:48px; display:flex; align-items:center; }
+.sidebar-top { padding-bottom:16px; border-bottom:1px solid rgba(255,255,255,0.04); }
+.org-info { margin-top:8px; color: rgba(255,255,255,0.9); }
+.sidebar-nav { flex:1; overflow:auto; padding-top:12px; }
+.sidebar-nav ul { list-style:none; padding:0; margin:0; }
+.sidebar-nav li { padding:10px 12px; border-radius:8px; cursor:pointer; color: rgba(255,255,255,0.85); }
+.sidebar-nav li.active, .sidebar-nav li:hover { background: rgba(255,255,255,0.04); }
+.submenu { padding-left:12px; }
+.sidebar-bottom { padding-top:12px; border-top:1px solid rgba(255,255,255,0.04); }
+.logout-btn { width:100%; padding:10px; background:#ED6C02; border:none; color:#fff; border-radius:8px; }
+@media (max-width: 900px) { .sidebar { transform: translateX(-110%); position:fixed; z-index:1000; } .sidebar.open { transform: translateX(0); } }

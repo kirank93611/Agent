@@ -1,0 +1,8 @@
+.topnav { position: fixed; top: 0; left: 0; right: 0; background: #fff; border-bottom: 1px solid #e6eef9; z-index: 1000; }
+.topnav-inner { display:flex; align-items:center; height:64px; }
+.menu-btn { display:inline-flex; padding:8px; border:none; background:transparent; font-size:1.2rem; }
+.topnav-spacer { flex:1; }
+.topnav-actions { display:flex; align-items:center; gap:12px; }
+.icon-btn { background:transparent; border:none; position:relative; }
+.badge { position:absolute; top:-6px; right:-8px; background:#22c55e; width:10px; height:10px; border-radius:50%; }
+.avatar { width:40px; height:40px; border-radius:50%; background:rgba(26,54,93,0.08); display:flex; align-items:center; justify-content:center; }

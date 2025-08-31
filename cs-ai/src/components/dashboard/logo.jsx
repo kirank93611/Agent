@@ -1,25 +1,9 @@
-import { Box, Typography } from '@mui/material';
+import './logo.css';
 
 export const Logo = () => {
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '100%',
-        height: '100%'
-      }}
-    >
-      <Typography
-        variant="h6"
-        sx={{
-          color: 'primary.main',
-          fontWeight: 'bold'
-        }}
-      >
-        CS-AI
-      </Typography>
-    </Box>
+    <div className="logo-root">
+      <div className="logo-text">CS-AI</div>
+    </div>
   );
-}; 
+};

@@ -1,0 +1,3 @@
+.view-root { flex-grow: 1; padding: 48px 0; }
+.view-title { font-size: 1.5rem; color: var(--primary-900); margin-bottom: 12px; }
+.view-desc { color: var(--muted); }

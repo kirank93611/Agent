@@ -1,87 +1,44 @@
 import { useState, useEffect } from 'react';
-import { Box, useMediaQuery, useTheme, IconButton } from '@mui/material';
-import { Menu as MenuIcon } from '@mui/icons-material';
 import { Outlet } from 'react-router-dom';
-import Sidebar from './Sidebar';
+import Sidebar from '../../dashboard/Sidebar';
+const MenuIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z" />
+  </svg>
+);
+import './DashboardLayout.css';
 
 const SIDE_NAV_WIDTH = 280;
-const MOBILE_BREAKPOINT = 'lg';
 
 const DashboardLayout = () => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down(MOBILE_BREAKPOINT));
-  const [isSidebarOpen, setIsSidebarOpen] = useState(!isMobile);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
-  // Handle responsive state changes
   useEffect(() => {
-    setIsSidebarOpen(!isMobile);
-  }, [isMobile]);
+    const onResize = () => {
+      setIsSidebarOpen(window.innerWidth > 1024);
+    };
+    onResize();
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
 
   return (
-    <Box sx={{ display: 'flex', minHeight: '100vh' }}>
-      <Sidebar
-        open={isSidebarOpen}
-        onClose={() => setIsSidebarOpen(false)}
-      />
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          width: '100%',
-          minHeight: '100vh',
-          display: 'flex',
-          flexDirection: 'column',
-          position: 'relative',
-          marginLeft: {
-            xs: 0,
-            [MOBILE_BREAKPOINT]: isSidebarOpen ? `${SIDE_NAV_WIDTH}px` : 0
-          },
-          transition: theme.transitions.create(['margin', 'width'], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen,
-          }),
-        }}
-      >
-        {/* Mobile Menu Button */}
-        {isMobile && (
-          <IconButton
-            onClick={() => setIsSidebarOpen(true)}
-            sx={{
-              position: 'fixed',
-              left: 16,
-              top: 16,
-              zIndex: theme.zIndex.appBar - 1,
-              bgcolor: 'background.paper',
-              boxShadow: 1,
-              '&:hover': {
-                bgcolor: 'background.paper',
-              }
-            }}
-          >
+    <div className="dl-root">
+      <Sidebar open={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+
+      <main className={`dl-main ${isSidebarOpen ? 'with-sidebar' : 'no-sidebar'}`}>
+        {/* Mobile menu button */}
+        {!isSidebarOpen && (
+          <button className="dl-menu-btn" onClick={() => setIsSidebarOpen(true)} aria-label="Open menu">
             <MenuIcon />
-          </IconButton>
+          </button>
         )}
-        
-        {/* Content Area */}
-        <Box
-          sx={{
-            flexGrow: 1,
-            p: {
-              xs: 2,
-              sm: 3,
-              md: 4
-            },
-            pt: {
-              xs: 8,
-              [MOBILE_BREAKPOINT]: 4
-            },
-            width: '100%',
-          }}
-        >
+
+        <div className="dl-content">
           <Outlet />
-        </Box>
-      </Box>
-    </Box>
+        </div>
+      </main>
+    </div>
   );
 };
 

@@ -1,21 +1,14 @@
 import React, { Suspense } from 'react';
-import { Box, CircularProgress } from '@mui/material';
 import { Outlet } from 'react-router-dom';
+import './App.css';
 
 function App() {
   return (
-    <Suspense 
+    <Suspense
       fallback={
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            minHeight: '100vh'
-          }}
-        >
-          <CircularProgress />
-        </Box>
+        <div className="app-fallback">
+          <div className="spinner" />
+        </div>
       }
     >
       <Outlet />
@@ -23,4 +16,4 @@ function App() {
   );
 }
 
-export default App; 
+export default App;

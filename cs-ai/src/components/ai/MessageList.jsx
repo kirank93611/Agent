@@ -1,35 +1,20 @@
 import React from 'react';
-import { Box, Avatar } from '@mui/material';
-import { SmartToy as AIIcon } from '@mui/icons-material';
 import ResponseBubble from './ResponseBubble';
+import './MessageList.css';
 
 const MessageList = ({ messages }) => {
   return (
-    <>
+    <div className="message-list">
       {messages.map((message) => (
-        <Box
+        <div
           key={message.id}
-          sx={{
-            display: 'flex',
-            alignItems: 'flex-start',
-            gap: 2,
-            flexDirection: message.sender === 'user' ? 'row-reverse' : 'row',
-          }}
+          className={`message ${message.sender === 'user' ? 'user-message' : 'ai-message'}`}
         >
-          <Avatar
-            sx={{
-              bgcolor: message.sender === 'user' ? 'primary.main' : 'secondary.main',
-              width: 32,
-              height: 32
-            }}
-          >
-            {message.sender === 'user' ? 'U' : <AIIcon />}
-          </Avatar>
           <ResponseBubble message={message} />
-        </Box>
+        </div>
       ))}
-    </>
+    </div>
   );
 };
 
-export default MessageList; 
+export default MessageList;

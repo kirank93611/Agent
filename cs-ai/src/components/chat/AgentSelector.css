@@ -1,0 +1,10 @@
+.agent-selector-root{padding:18px;background:transparent}
+.agent-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
+.agent-card{background:#fff;border:1px solid #e6eefb;border-radius:12px;padding:16px;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease}
+.agent-card:hover{transform:translateY(-6px);box-shadow:0 8px 24px rgba(0,0,0,0.06)}
+.agent-card-head{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.agent-icon{width:44px;height:44px;border-radius:10px;color:#fff;display:flex;align-items:center;justify-content:center}
+.agent-title{font-weight:600;color:#1a365d}
+.agent-desc{color:#2d4a77;margin-bottom:10px}
+.agent-tags{display:flex;flex-wrap:wrap;gap:8px}
+.agent-tag{font-size:12px;padding:6px 10px;border-radius:8px;background:rgba(20,80,160,0.06);color:#1a365d}

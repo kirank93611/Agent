@@ -1,24 +1,15 @@
-import { Box, Container, Typography } from '@mui/material';
+import React from 'react';
+import './views.css';
 
 const Agents = () => {
   return (
-    <Box
-      component="main"
-      sx={{
-        flexGrow: 1,
-        py: 8
-      }}
-    >
-      <Container maxWidth="lg">
-        <Typography variant="h4" gutterBottom>
-          AI Agents
-        </Typography>
-        <Typography variant="body1">
-          Manage and monitor your AI agents.
-        </Typography>
-      </Container>
-    </Box>
+    <main className="view-root">
+      <div className="container">
+        <h1 className="view-title">AI Agents</h1>
+        <p className="view-desc">Manage and monitor your AI agents.</p>
+      </div>
+    </main>
   );
 };
 
-export default Agents; 
+export default Agents;

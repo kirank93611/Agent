@@ -1,0 +1,29 @@
+:root{
+  --color-primary:#1a365d;
+  --color-primary-2:#2d4a77;
+  --bg-default:#f8faff;
+  --bg-paper:#ffffff;
+  --muted:#6b7280;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body,#root{height:100%;width:100%;display:flex;flex-direction:column}
+body{font-family:Inter, Roboto, Arial, sans-serif;background:var(--bg-default);color:#152238}
+/* Global reset similar to previous MuiCssBaseline overrides */
+*, *::before, *::after { box-sizing: border-box; }
+html, body, #root { height: 100%; width: 100%; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; display: flex; flex-direction: column; min-height: 100%; }
+#root { display: flex; flex: 1 1 auto; flex-direction: column; }
+
+/* Utility containers */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+/* Basic link/button reset */
+button { font-family: inherit; }
+
+/* Color tokens used by components (can be extended) */
+:root {
+  --primary-900: #1a365d;
+  --primary-800: #2d4a77;
+  --text-dark: #1f2937;
+  --muted: #6b7280;
+}

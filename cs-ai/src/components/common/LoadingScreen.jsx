@@ -1,18 +1,10 @@
 import React from 'react';
-import { Box, CircularProgress } from '@mui/material';
+import './LoadingScreen.css';
 
 const LoadingScreen = React.memo(() => (
-  <Box
-    sx={{
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      height: '100vh',
-      bgcolor: 'background.default'
-    }}
-  >
-    <CircularProgress color="primary" />
-  </Box>
+  <div className="loading-root">
+    <div className="spinner" aria-hidden />
+  </div>
 ));
 
-export default LoadingScreen; 
+export default LoadingScreen;

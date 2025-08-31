@@ -1,29 +1,18 @@
-import { Box, Container, Typography } from '@mui/material';
-import CardInvertedColors from "./dashboard-card/CardBox";
+import React from 'react';
 import CardBox from './dashboard-card/CardBox';
-import ChatbotIcon from '../../components/chatbot/ChatbotIcon';
+import '../../views/views.css';
 
 const Overview = () => {
   return (
-    <Box
-      component="main"
-      sx={{
-        flexGrow: 1,
-        py: 8
-      }}
-    >
-
-
-      <Container maxWidth="xl">
-        <Typography variant="h4" gutterBottom>
-          Dashboard Overview
-        </Typography>
-        <Typography variant="body1" sx={{ mb: 4 }}>
+    <main className="view-root">
+      <div className="container">
+        <h1 className="view-title">Dashboard Overview</h1>
+        <p className="view-desc" style={{ marginBottom: 16 }}>
           Welcome to your dashboard. Here you can manage your AI agents and monitor their performance.
-        </Typography>
-        <CardBox></CardBox>
-      </Container>
-    </Box>
+        </p>
+        <CardBox />
+      </div>
+    </main>
   );
 };
 

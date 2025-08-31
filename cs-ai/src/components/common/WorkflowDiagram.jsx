@@ -1,9 +1,7 @@
 import { motion } from 'framer-motion';
-import { Box, useTheme, useMediaQuery } from '@mui/material';
+import './WorkflowDiagram.css';
 
 const WorkflowDiagram = () => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   const pathVariants = {
     hidden: { pathLength: 0 },
@@ -41,32 +39,18 @@ const WorkflowDiagram = () => {
   };
 
   return (
-    <Box
-      sx={{
-        width: '100%',
-        height: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        p: { xs: 2, sm: 4, md: 6 },
-        position: 'relative'
-      }}
-    >
+    <div className="workflow-root">
       <motion.svg
+        className="workflow-svg"
         viewBox="0 0 1000 800"
-        style={{
-          width: '100%',
-          height: '100%',
-          maxWidth: '1000px'
-        }}
         preserveAspectRatio="xMidYMid meet"
       >
         {/* Enhanced Background gradient */}
         <defs>
           <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style={{ stopColor: '#f0f7ff', stopOpacity: 0.9 }} />
-            <stop offset="50%" style={{ stopColor: '#e6f0ff', stopOpacity: 0.9 }} />
-            <stop offset="100%" style={{ stopColor: '#dde9ff', stopOpacity: 0.9 }} />
+            <stop offset="0%" stopColor="#f0f7ff" stopOpacity="0.9" />
+            <stop offset="50%" stopColor="#e6f0ff" stopOpacity="0.9" />
+            <stop offset="100%" stopColor="#dde9ff" stopOpacity="0.9" />
           </linearGradient>
           <filter id="shadow">
             <feDropShadow dx="0" dy="4" stdDeviation="4" floodOpacity="0.2"/>
@@ -330,7 +314,7 @@ const WorkflowDiagram = () => {
           Automated support that learns and improves with every interaction
         </motion.text>
       </motion.svg>
-    </Box>
+    </div>
   );
 };
 
